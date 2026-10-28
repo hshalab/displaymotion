@@ -192,4 +192,4 @@ robot.play(display, "walk");
 
 ## Remove everything when the plugin stops
 
-You do not need to do anything. The library removes all displays when your plugin disables. To do it by hand, call `motion.close()`.
+You do not need to do anything. The library removes all displays when your plugin disables. To do it by hand, call `motion.close()`. To remove them and keep using the library, use `motion.displays().forEach(MotionDisplay::remove)`. `displays()` is a copy of the displays that are still there.

@@ -144,6 +144,7 @@ public final class MotionDisplay {
             partIndex.put(parts[i].name, i);
         }
         this.parts = List.of(names);
+        engine.handles.add(this);
     }
 
     DisplayState state() {

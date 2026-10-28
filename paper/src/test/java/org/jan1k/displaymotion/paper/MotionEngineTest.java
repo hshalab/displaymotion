@@ -528,6 +528,18 @@ class MotionEngineTest {
     }
 
     @Test
+    void removedDisplayLeavesTheHandleSet() {
+        MotionDisplay display = display();
+        tick();
+        assertTrue(engine.handles.contains(display));
+
+        display.remove();
+        tick();
+
+        assertFalse(engine.handles.contains(display));
+    }
+
+    @Test
     void privateDisplayOnlyShowsToChosenPlayers() {
         MotionDisplay display = display().visibleByDefault(false);
         tick();

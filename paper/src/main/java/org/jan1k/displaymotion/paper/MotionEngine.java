@@ -103,6 +103,7 @@ final class MotionEngine {
     final Bodies bodies = new Bodies();
     // real server entities players sit on, removed when the library closes
     final Set<org.bukkit.entity.Entity> seats = ConcurrentHashMap.newKeySet();
+    final Set<MotionDisplay> handles = ConcurrentHashMap.newKeySet();
 
     private volatile Snapshot snapshot = new Snapshot(0L, new PlayerView[0]);
     volatile boolean debug;
@@ -842,6 +843,7 @@ final class MotionEngine {
         }
         display.removed = true;
         display.active = false;
+        handles.remove(display.handle);
         for (Hitbox hitbox : display.hitboxes) {
             clickable.remove(hitbox.entityId);
         }

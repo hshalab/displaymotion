@@ -40,8 +40,10 @@ import org.bukkit.scheduler.BukkitTask;
 import org.jan1k.displaymotion.Pose;
 import org.jan1k.displaymotion.paper.bstats.Metrics;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -163,6 +165,20 @@ public final class DisplayMotion {
     /** Ready-made effects like kill effects. Each one removes itself when it ends. */
     public Effects effects() {
         return effects;
+    }
+
+    /**
+     * The displays of this plugin that are still there. It is a copy of now, a display made later is not in it.
+     * Good to clean up, for example {@code motion.displays().forEach(MotionDisplay::remove)}.
+     */
+    public List<MotionDisplay> displays() {
+        List<MotionDisplay> alive = new ArrayList<>();
+        for (MotionDisplay display : engine.handles) {
+            if (!display.isRemoved()) {
+                alive.add(display);
+            }
+        }
+        return List.copyOf(alive);
     }
 
     /** Starts a model made of many parts. Add parts, then call {@link ModelBuilder#spawn()}. */
